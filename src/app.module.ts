@@ -2,12 +2,11 @@ import { Module } from '@nestjs/common';
 
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
-import { UserResolver } from './graphql/resolvers/user.resolver';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import appConfig from 'config/app.config';
 import databaseConfig from 'config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './module/user/user.module';
 
 @Module({
   imports: [
@@ -26,8 +25,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       }),
       inject: [ConfigService],
     }),
+    UserModule,
   ],
   controllers: [],
-  providers: [UserResolver],
+  providers: [],
 })
 export class AppModule {}
