@@ -1,30 +1,31 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { UserSetting } from 'src/module/user_setting/model/user_setting.model';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 
-@Entity('user')
+
+@Entity({ name: 'users' })
 @ObjectType()
 export class User {
   @PrimaryGeneratedColumn()
-  @Field(() => Int)
+  @Field((type) => Int)
   id: number;
 
   @Column()
   @Field()
   username: string;
 
-  @Column()
-  @Field()
-  passsword: string;
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  displayName?: string;
 
-  @Column()
-  @Field()
-  fullname: string;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  @Field()
-  createdAt: Date;
-
-  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  @Field()
-  updatedAt: Date;
+  @OneToOne(() => UserSetting)
+  @JoinColumn()
+  @Field({ nullable: true })
+  settings?: UserSetting;
 }
