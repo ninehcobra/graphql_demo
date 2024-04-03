@@ -15,7 +15,6 @@ import { UserSettingModule } from './module/user_setting/user_setting.module';
       driver: ApolloDriver,
       autoSchemaFile: 'src/graphql.gql',
       installSubscriptionHandlers: true,
-
     }),
     ConfigModule.forRoot({
       isGlobal: true,
@@ -29,9 +28,9 @@ import { UserSettingModule } from './module/user_setting/user_setting.module';
       inject: [ConfigService],
     }),
     UserModule,
-    UserSettingModule
+    UserSettingModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}
